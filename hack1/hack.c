@@ -41,10 +41,15 @@ void print_card( int i, int card )
 
 void print_stats( int heat, int hack, int moves )
 {
-    // Show the hand and stats
-    printf( "\n\nHeat = %2d  Hack = %2d  Move %d/8\n\n", heat, hack, moves+1 );
+    printf("\tMoves |");
+    for ( int i = 0 ; i < 8 ; i++ )
+    {
+       if ( i < (8-moves) ) printf("#");
+       else printf(" ");
+    }
+    printf("|   (%2d)\n", (8-moves ));
 
-    printf("\tHeat |");
+    printf("\tHeat  |");
     for ( int i = 0 ; i < 10 ; i++ )
     {
        if ( i < heat ) printf("#");
@@ -52,7 +57,7 @@ void print_stats( int heat, int hack, int moves )
     }
     printf("| (%2d)\n", heat);
 
-    printf("\tHack |");
+    printf("\tHack  |");
     for ( int i = 0 ; i < 10 ; i++ )
     {
        if ( i < hack ) printf("#");
@@ -88,6 +93,7 @@ void main( void )
        printf("\n\tSelect a card (0, 1, 2):");
        scanf("%s", ch);
        selection = atoi(ch);
+       printf("\n");
 
        heat += deck[ hand[ selection ] ].heat;
        hack += deck[ hand[ selection ] ].hack;
@@ -99,8 +105,6 @@ void main( void )
 
        moves++;
     }
-
-    printf("\n");
 
     print_stats( heat, hack, moves );
 
